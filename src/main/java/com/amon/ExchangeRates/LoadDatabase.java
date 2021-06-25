@@ -1,6 +1,5 @@
 package com.amon.ExchangeRates;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,11 +12,11 @@ class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadData.class);
 
     @Bean
-    CommandLineRunner initDatabase(EmployeeRepository repository) {
+    CommandLineRunner initDatabase(RatesRepository repository) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
-            log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
+            RootController root = new RootController();
+            root.start();
         };
     }
 }

@@ -27,7 +27,7 @@ public class RootController extends Thread {
     List<Root> resultList = new ArrayList<>();
 
     public static void main(String[] args) {
-        RatesController rts = new RatesController();
+        RootController rts = new RootController();
         rts.start();
     }
 
@@ -49,7 +49,7 @@ public class RootController extends Thread {
                     System.out.println(output);
                     response.append(output);
                 }
-                RatesController rate = new RatesController();
+                RootController rate = new RootController();
                 rate.populateRates(response.toString());
                 conn.disconnect();
                 Thread.sleep(5000);
@@ -81,15 +81,15 @@ public class RootController extends Thread {
         }
     }
 
-    @GetMapping(value = "/obtainExchangeWithDuration")
+    @GetMapping(value = "/obtainExchangeWithDuration/{fromDate}/{toDate}")
     public String obtainExchangeWithDuration(Date fromDate, Date toDate) {
         StringBuilder br = new StringBuilder();
         try {
             for (Root res : resultList) {
                 try {
-                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(res.getRoot().getTime().getUpdatedISO());
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(res.getTime().getUpdatedISO());
                     if (date.after(fromDate) && date.before(toDate)) {
-                        br.append("Date :" + res.getRoot().getTime().getUpdatedISO() + " 1 BTC = " + res.getRoot().getBpi().getUsd().getRate() + " USD\n");
+                        br.append("Date :" + res.getTime().getUpdatedISO() + " 1 BTC = " + res.getBpi().getUsd().getRate() + " USD\n");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
