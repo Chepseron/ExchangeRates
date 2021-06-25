@@ -26,12 +26,8 @@ public class RootController extends Thread {
     USD usd = new USD();
     List<Root> resultList = new ArrayList<>();
 
-    public static void main(String[] args) {
-        RootController rts = new RootController();
-        rts.start();
-    }
-
-    public void run() {
+    @GetMapping(value = "/queryRates")
+    public void queryRates() {
         try {
             while (true) {
                 URL url = new URL("https://api.coindesk.com/v1/bpi/currentprice/USD.json");

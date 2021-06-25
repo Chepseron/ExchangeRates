@@ -9,14 +9,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class LoadDatabase {
 
-    private static final Logger log = LoggerFactory.getLogger(LoadData.class);
+    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
     CommandLineRunner initDatabase(RatesRepository repository) {
-
-        return args -> {
-            RootController root = new RootController();
-            root.start();
-        };
+        RootController root = new RootController();
+        root.queryRates();
+        return null;
     }
 }
